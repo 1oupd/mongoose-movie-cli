@@ -1,5 +1,10 @@
 require("./db/connection");
-const { addMovie } = require("./movie/movie.methods");
+const {
+  addMovie,
+  listMovies,
+  updateActor,
+  deleteMovie,
+} = require("./movie/movie.methods");
 // if you used imports.function then import with curlies
 const yargs = require("yargs");
 
@@ -12,6 +17,12 @@ const app = () => {
       genre: yargs.argv.genre,
       quote: yargs.argv.quote,
     });
+  } else if (process.argv[2] === "list") {
+    listMovies({ title: yargs.argv.title });
+  } else if (process.argv[2] === "update") {
+    updateActor({ title: yargs.argv.title, actor: yargs.argv.actor });
+  } else if (process.argv[2] === "delete") {
+    deleteMovie({ title: yargs.argv.title });
   }
 };
 
